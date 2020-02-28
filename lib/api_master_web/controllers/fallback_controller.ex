@@ -6,10 +6,17 @@ defmodule ApiMasterWeb.FallbackController do
   """
   use ApiMasterWeb, :controller
 
-  def call(conn, {:error, %Ecto.Changeset{}}) do
+  def call(conn, {:error, :not_found}) do
+    conn
+    |> put_status(:not_found)
+    |> put_view(WhatsproWeb.ErrorView)
+    |> render(:"404")
+  end
+
+  def call(conn, {:error, %Ecto.Changeset{} = changeset}) do
     conn
     |> put_status(:unprocessable_entity)
     |> put_view(ApiMasterWeb.ErrorView)
-    |> render(:"422")
+    |> render("422.json", changeset)
   end
 end

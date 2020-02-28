@@ -13,4 +13,12 @@ defmodule ApiMasterWeb.ErrorView do
   def template_not_found(template, _assigns) do
     Phoenix.Controller.status_message_from_template(template)
   end
+
+  def render("422.json", changeset) do
+    errors =
+      changeset.errors
+      |> Enum.map(fn {k, {text, _validations}} -> %{k => text} end)
+
+    %{errors: errors}
+  end
 end

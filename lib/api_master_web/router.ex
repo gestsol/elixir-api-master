@@ -22,5 +22,6 @@ defmodule ApiMasterWeb.Router do
   scope "/api", ApiMasterWeb do
     pipe_through :api
     resources "/users", UserController, except: [:new, :edit]
+    resources "/clients", ClientController, except: [:new, :edit]
   end
 end
