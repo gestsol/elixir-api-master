@@ -20,4 +20,12 @@ defmodule ApiMasterWeb.UserView do
       client_id: user.client_id
     }
   end
+
+  def render("sign_in.json", %{user: user}) do
+    %{
+      data: %{
+        user: Map.take(user, ~w(id name email mobile client_id)a)
+      }
+    }
+  end
 end

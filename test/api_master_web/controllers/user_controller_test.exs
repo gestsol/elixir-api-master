@@ -63,7 +63,17 @@ defmodule ApiMasterWeb.UserControllerTest do
   describe "index" do
     test "lists all users", %{conn: conn, current_user: current_user} do
       conn = get(conn, Routes.user_path(conn, :index))
-      assert [%{}] = json_response(conn, 200)["data"]
+
+      assert json_response(conn, 200)["data"] == [
+               %{
+                 "id" => current_user.id,
+                 "email" => current_user.email,
+                 "is_active" => current_user.is_active,
+                 "mobile" => current_user.mobile,
+                 "name" => current_user.name,
+                 "client_id" => current_user.client_id
+               }
+             ]
     end
   end
 

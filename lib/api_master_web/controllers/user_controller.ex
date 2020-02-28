@@ -40,4 +40,24 @@ defmodule ApiMasterWeb.UserController do
       send_resp(conn, :no_content, "")
     end
   end
+
+  def sign_in(conn, %{"email" => email, "password" => password}) do
+    case ApiMaster.Account.authenticate_user(email, password) do
+      {:ok, user} ->
+        conn
+        |> put_session(:current_user_id, user.id)
+        |> put_session(:current_client_id, user.client_id)
+        |> put_status(:ok)
+        |> put_view(ApiMasterWeb.UserView)
+        |> render("sign_in.json", user: user)
+
+      {:error, message} ->
+        conn
+        |> delete_session(:current_user_id)
+        |> delete_session(:current_client_id)
+        |> put_status(:unauthorized)
+        |> put_view(ApiMasterWeb.ErrorView)
+        |> render("401.json", message: message)
+    end
+  end
 end
