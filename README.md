@@ -8,6 +8,8 @@ Bienvenido Al proyecto Base para instalar
 4. crear un nuevo repositorio git (git init)
 5. hacer el primer commit (git commit -a -m "primer commit")
 
+# debe cargar el proyecto en su editor con el nuevo nombre del proyecto
+
 To start your Phoenix server:
 
 - Install dependencies with `mix deps.get`
