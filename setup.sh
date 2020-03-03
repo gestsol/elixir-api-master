@@ -1,5 +1,14 @@
 #!/usr/bin/env sh
 
+
+# -----------------------------------------------------------------------------
+# Configuracion
+# -----------------------------------------------------------------------------
+
+pascalCaseBefore="ApiMaster"
+snakeCaseBefore="api_master"
+kebabCaseBefore="api-master"
+
 content=$(find . -type f \( \
   -name "*.ex" -or \
   -name "*.exs" -or \
@@ -20,25 +29,25 @@ content=$(find . -type f \( \
   -and ! -path "./deps/*" \
 )
 
-paths=$(find .\( \
+paths=$(find . -maxdepth 2 -mindepth 2 \( \
   -path "./lib/${snakeCaseBefore}*" -or \
   -path "./lib/${snakeCaseBefore}_*" -or \
   -path "./lib/${snakeCaseBefore}.*" -or \
-  -path "./test/${snakeCaseBefore}" -or \
+  -path "./test/${snakeCaseBefore}*" -or \
   -path "./test/${snakeCaseBefore}_*" \
 \))
 
-#echo " $paths"
-
 # -----------------------------------------------------------------------------
-# Configuracion
+# Funciones
 # -----------------------------------------------------------------------------
 
-pascalCaseBefore="ApiMaster"
-snakeCaseBefore="api_master"
-kebabCaseBefore="api-master"
+header() {
+  echo "\033[0;33m▶ $1\033[0m"
+}
 
-
+success() {
+  echo "\033[0;32m▶ $1\033[0m"
+}
 
 # -----------------------------------------------------------------------------
 # Validacion
@@ -51,19 +60,39 @@ fi
 
 pascalCaseAfter=$1
 snakeCaseAfter=$(echo $pascalCaseAfter | sed 's/\(.\)\([A-Z]\)/\1_\2/g'| tr '[:upper:]' '[:lower:]')
-#kebabCaseAfter=$(echo $snakeCaseAfter | tr '_' '-')
+kebabCaseAfter=$(echo $snakeCaseAfter | tr '_' '-')
 
 
 # -----------------------------------------------------------------------------
 #  Ejecucion 
 # -----------------------------------------------------------------------------
+header "Configuration"
+echo "${pascalCaseBefore} → ${pascalCaseAfter}"
+echo "${snakeCaseBefore} → ${snakeCaseAfter}"
+echo "${kebabCaseBefore} → ${kebabCaseAfter}"
+echo ""
 
+header "Cambiando nombre del Proyecto dentro del Contenido....." 
 for file in $content
 do
   sed -i "s/$pascalCaseBefore/$pascalCaseAfter/g" $file
   sed -i "s/$snakeCaseBefore/$snakeCaseAfter/g" $file
 done
+success "Hecho!!!!\n"
 
+header "Cambiando rutas de los directorios....."
 for path in $paths; do
   mv $path $(echo $path | sed "s/$snakeCaseBefore/$snakeCaseAfter/g")
 done
+success "Hecho!!!!\n"
+
+
+header "Cambiando nombre del Directorio Raiz....."
+mv $PWD $(echo $PWD | sed "s/api-test/$kebabCaseAfter/g")
+
+success "Hecho!!!!\n"
+
+header "Eliminando el Scrip para hacer Setup al Proyecto...."
+rm -fr setup.sh
+
+success "Hecho!!!!\n"
