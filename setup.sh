@@ -88,7 +88,7 @@ success "Hecho!!!!\n"
 
 
 header "Cambiando nombre del Directorio Raiz....."
-mv $PWD $(echo $PWD | sed "s/api-test/$kebabCaseAfter/g")
+mv $PWD $(echo $PWD | sed "s/elixir-api-master/$kebabCaseAfter/g")
 
 success "Hecho!!!!\n"
 

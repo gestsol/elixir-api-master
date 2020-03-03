@@ -1,11 +1,19 @@
 # ApiMaster
 
+Bienvenido Al proyecto Base para instalar
+
+1. Clonar el proyecto (https://github.com/gestsol/elixir-api-master.git)
+2. borrar el direcrorio Git ( rm -rf .git) (puede necesitar permisos como administrador)
+3. correr el script setup.sh (./setup.sh NombreDelProyecto) # importante debe hacer setup.sh ejecutable (chmod +x setup.sh)
+4. crear un nuevo repositorio git (git init)
+5. hacer el primer commit (git commit -a -m "primer commit")
+
 To start your Phoenix server:
 
-  * Install dependencies with `mix deps.get`
-  * Create and migrate your database with `mix ecto.setup`
-  * Install Node.js dependencies with `cd assets && npm install`
-  * Start Phoenix endpoint with `mix phx.server`
+- Install dependencies with `mix deps.get`
+- Create and migrate your database with `mix ecto.setup`
+- Install Node.js dependencies with `cd assets && npm install`
+- Start Phoenix endpoint with `mix phx.server`
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
@@ -13,8 +21,8 @@ Ready to run in production? Please [check our deployment guides](https://hexdocs
 
 ## Learn more
 
-  * Official website: https://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Forum: https://elixirforum.com/c/phoenix-forum
-  * Source: https://github.com/phoenixframework/phoenix
+- Official website: https://www.phoenixframework.org/
+- Guides: https://hexdocs.pm/phoenix/overview.html
+- Docs: https://hexdocs.pm/phoenix
+- Forum: https://elixirforum.com/c/phoenix-forum
+- Source: https://github.com/phoenixframework/phoenix
