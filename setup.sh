@@ -12,6 +12,7 @@ kebabCaseBefore="api-master"
 content=$(find . -type f \( \
   -name "*.ex" -or \
   -name "*.exs" -or \
+  -name "*.eex" -or 
   -name "*.ees" -or \
   -name "*.sh" -or \
   -name "*.json" -or \
